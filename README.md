@@ -1,57 +1,19 @@
-# Project Name
+### PARDON OUR DUST: THIS REPO IS STILL GETTING BUILT
+# Azure IoT C Client Library Samples
 
-(short, 1-3 sentenced, description of the project)
+A repository of samples for use with the [Azure IoT C Client Library](https://github.com/Azure/azure-iot-sdk-c).
 
-## Features
+# Samples 
 
-This project framework provides the following features:
+TBD
 
-* Feature 1
-* Feature 2
-* ...
+# Community Guidelines
 
-## Getting Started
+If you have an issue running a sample and you believe the error is a result of the sample code, submit a Github Issue to this repo. If you believe the error is from the C Client Library, please submit a Github issue to the [C Client Library](https://github.com/Azure/azure-iot-sdk-c/issues/new/choose).
 
-### Prerequisites
+If you want to contribute to this repository, consider submitting a PR.
 
-(ideally very short, if any)
+This project has adopted the Microsoft [Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct). For more information see the Code of Conduct FAQ or contact opencode@microsoft.com with any additional questions or comments.
 
-- OS
-- Library version
-- ...
+Microsoft collects performance and usage information which may be used to provide and improve Microsoft products and services and enhance your experience. To learn more, review the privacy statement.
 
-### Installation
-
-(ideally very short)
-
-- npm install [package name]
-- mvn install
-- ...
-
-### Quickstart
-(Add steps to get up and running quickly)
-
-1. git clone [repository clone url]
-2. cd [respository name]
-3. ...
-
-
-## Demo
-
-A demo app is included to show how to use the project.
-
-To run the demo, follow these steps:
-
-(Add steps to start up the demo)
-
-1.
-2.
-3.
-
-## Resources
-
-(Any additional resources or related projects)
-
-- Link to supporting information
-- Link to similar sample
-- ...
