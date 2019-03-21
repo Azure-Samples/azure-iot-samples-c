@@ -59,7 +59,9 @@ TBD
         │   └── test_5.txt
         └── tests.c
 ```
+# [Wiki](https://github.com/Azure-Samples/azure-iot-samples-c/wiki)
 
+While simple README.md files are provided embedded within the codebase itself, more in depth documentation can be found in the Github Wiki, including sample walkthroughs.
 
 # Community Guidelines
 
