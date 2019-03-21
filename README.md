@@ -8,7 +8,7 @@ A repository of samples for use with the [Azure IoT C Client Library](https://gi
 TBD
 
 # File Tree
-
+```bash
 .
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
@@ -58,7 +58,7 @@ TBD
         │   ├── test_2.txt
         │   └── test_5.txt
         └── tests.c
-
+```
 
 
 # Community Guidelines
