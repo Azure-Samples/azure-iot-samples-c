@@ -7,6 +7,60 @@ A repository of samples for use with the [Azure IoT C Client Library](https://gi
 
 TBD
 
+# File Tree
+
+.
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── iot-hub-device-client
+│   ├── CMakeLists.txt
+│   ├── multithreaded
+│   │   ├── CMakeLists.txt
+│   │   ├── device-twin-and-methods
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── iothub_device_twin_and_methods_sample.c
+│   │   │   ├── linux
+│   │   │   │   ├── CMakeLists.txt
+│   │   │   │   └── README.md
+│   │   │   └── readme.md
+│   │   └── telemetry
+│   │       ├── CMakeLists.txt
+│   │       ├── iothub_telemetry_sample.c
+│   │       └── linux
+│   │           ├── CMakeLists.txt
+│   │           └── README.md
+│   ├── README.md
+│   └── singlethreaded
+│       ├── CMakeLists.txt
+│       └── telemetry
+│           ├── CMakeLists.txt
+│           ├── iothub_ll_telemetry_sample.c
+│           └── linux
+│               ├── CMakeLists.txt
+│               └── README.md
+├── LICENSE.txt
+├── README.md
+└── tools
+    ├── c_sdk_aptget.sh
+    └── parson
+        ├── LICENSE
+        ├── Makefile
+        ├── package.json
+        ├── parson.c
+        ├── parson.h
+        ├── README.md
+        ├── tests
+        │   ├── test_1_1.txt
+        │   ├── test_1_2.txt
+        │   ├── test_1_3.txt
+        │   ├── test_2_comments.txt
+        │   ├── test_2_pretty.txt
+        │   ├── test_2.txt
+        │   └── test_5.txt
+        └── tests.c
+
+
+
 # Community Guidelines
 
 If you have an issue running a sample and you believe the error is a result of the sample code, submit a Github Issue to this repo. If you believe the error is from the C Client Library, please submit a Github issue to the [C Client Library](https://github.com/Azure/azure-iot-sdk-c/issues/new/choose).
