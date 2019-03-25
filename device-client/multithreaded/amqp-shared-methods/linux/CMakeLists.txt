@@ -2,12 +2,16 @@
 #Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 cmake_minimum_required(VERSION 3.10)
-project(iothub_client_sample_upload_to_blob_mb_linux)
+project(iothub_client_sample_amqp_shared_methods_linux)
 
-set(AZUREIOT_INC_FOLDER "/usr/include/azureiot" "/usr/include/azureiot/inc")
+if(NOT ${use_amqp})
+    message(FATAL_ERROR "iothub_client_sample_amqp_shared being generated without uamqp support")
+endif()
+
+set(AZUREIOT_INC_FOLDER ".." "/usr/include/azureiot" "/usr/include/azureiot/inc")
 
 set(sample_application_c_files
-    ${PROJECT_SOURCE_DIR}/../iothub_client_sample_upload_to_blob_mb.c
+    ${PROJECT_SOURCE_DIR}/../iothub_client_sample_amqp_shared_methods.c
     ${PROJECT_SOURCE_DIR}/../../../../tools/.certs/certs.c
 )
 
@@ -29,13 +33,11 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     iothub_client
-    iothub_client_http_transport
-    prov_auth_client
-    hsm_security_client
-    uhttp
+    iothub_client_amqp_transport
+    iothub_client_amqp_ws_transport
+    uamqp
     aziotsharedutil
     uuid
-    parson
     pthread
     curl
     ssl

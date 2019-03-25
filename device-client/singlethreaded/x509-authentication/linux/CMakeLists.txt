@@ -2,7 +2,7 @@
 #Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 cmake_minimum_required(VERSION 3.10)
-project(iothub_ll_client_x509_sample)
+project(iothub_ll_client_x509_sample_linux)
 
 if (NOT "${use_amqp}" AND NOT "${use_mqtt}" AND NOT "${use_http}")
     message("CMAKE WARNING: No protocol has been set. 
@@ -13,7 +13,7 @@ if (NOT "${use_amqp}" AND NOT "${use_mqtt}" AND NOT "${use_http}")
     set(use_http ON)
 endif()
 
-set(AZUREIOT_INC_FOLDER ".." "/usr/include/azureiot" "/usr/include/azureiot/inc")
+set(AZUREIOT_INC_FOLDER "/usr/include/azureiot" "/usr/include/azureiot/inc")
 
 set(sample_application_c_files
     ${PROJECT_SOURCE_DIR}/../iothub_ll_client_x509_sample.c

@@ -2,16 +2,18 @@
 #Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 cmake_minimum_required(VERSION 3.10)
-project(iothub_client_sample_upload_to_blob_mb_linux)
+project(iothub_client_sample_mqtt_dm_linux)
 
-set(AZUREIOT_INC_FOLDER "/usr/include/azureiot" "/usr/include/azureiot/inc")
+set(AZUREIOT_INC_FOLDER "pi_device" "../../../serializer/inc" "." "/usr/include/azureiot" "/usr/include/azureiot/inc")
 
 set(sample_application_c_files
-    ${PROJECT_SOURCE_DIR}/../iothub_client_sample_upload_to_blob_mb.c
+    ${PROJECT_SOURCE_DIR}/../iothub_client_sample_mqtt_dm.c
     ${PROJECT_SOURCE_DIR}/../../../../tools/.certs/certs.c
+    pi_device/pi.c
 )
 
 set(sample_application_h_files
+    ${PROJECT_SOURCE_DIR}/../iothub_client_sample_mqtt_dm.h
 )
 
 add_executable(${PROJECT_NAME} 
@@ -29,16 +31,12 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     iothub_client
-    iothub_client_http_transport
-    prov_auth_client
-    hsm_security_client
-    uhttp
+    iothub_client_mqtt_transport
+    iothub_client_mqtt_ws_transport
+    serializer
     aziotsharedutil
-    uuid
-    parson
+    umqtt
     pthread
     curl
-    ssl
-    crypto
     m
 )

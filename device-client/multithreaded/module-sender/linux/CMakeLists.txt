@@ -2,23 +2,25 @@
 #Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 cmake_minimum_required(VERSION 3.10)
-project(iotedge_downstream_device_sample_linux)
+project(iothub_client_sample_module_sender_linux)
 
-if (NOT "${use_amqp}" AND NOT "${use_mqtt}" AND NOT "${use_http}")
+if (NOT "${use_amqp}" AND NOT "${use_mqtt}")
     message("CMAKE WARNING: No protocol has been set. 
-    Defaulting to link mqtt, amqp, and http.
+    Defaulting to link mqtt, amqp.
     To only link a specific protocol, add the cmake option '-D use_<protocol>=ON'")
     set(use_mqtt ON)
     set(use_amqp ON)
-    set(use_http ON)
 endif()
 
+set(AZUREIOT_INC_FOLDER ".." "/usr/include/azureiot" "/usr/include/azureiot/inc")
+
 set(sample_application_c_files
-    ${PROJECT_SOURCE_DIR}/../iotedge_downstream_device_sample.c
+    ${PROJECT_SOURCE_DIR}/../iothub_client_sample_module_sender.c
     ${PROJECT_SOURCE_DIR}/../../../../tools/.certs/certs.c
 )
 
 set(sample_application_h_files
+    ${PROJECT_SOURCE_DIR}/../iothub_client_sample_module_sender.c
 )
 
 add_executable(${PROJECT_NAME} 
@@ -42,10 +44,7 @@ if ("${use_amqp}")
     message("target_link_libraries: use_amqp")
     target_link_libraries(${PROJECT_NAME} iothub_client_amqp_transport iothub_client_amqp_ws_transport uamqp)
 endif()
-if ("${use_http}")
-    message("target_link_libraries: use_http")
-    target_link_libraries(${PROJECT_NAME} iothub_client_http_transport)
-endif()
+
 
 target_link_libraries(${PROJECT_NAME}
     iothub_client
@@ -61,4 +60,3 @@ target_link_libraries(${PROJECT_NAME}
     crypto
     m
 )
-
