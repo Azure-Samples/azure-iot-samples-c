@@ -23,7 +23,10 @@ set(sample_application_c_files
 set(sample_application_h_files
 )
 
-add_executable(${PROJECT_NAME} ${sample_application_c_files} ${sample_application_h_files})
+add_executable(${PROJECT_NAME} 
+    ${sample_application_c_files} 
+    ${sample_application_h_files}
+)
 
 target_include_directories(${PROJECT_NAME} 
     PRIVATE 
