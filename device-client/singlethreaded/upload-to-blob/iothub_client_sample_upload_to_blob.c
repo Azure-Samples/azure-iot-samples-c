@@ -5,7 +5,6 @@
 // Checking of return codes and error values shall be omitted for brevity.  Please practice sound engineering practices
 // when writing production code.
 
-#ifndef DONT_USE_UPLOADTOBLOB
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,16 +14,18 @@ That does not mean that HTTP only works with the _LL APIs.
 Simply changing the using the convenience layer (functions not having _LL)
 and removing calls to _DoWork will yield the same results. */
 
+#include "azure_c_shared_utility/shared_util_options.h"
 #include "iothub.h"
 #include "iothub_device_client.h"
-
-#include "azure_c_shared_utility/shared_util_options.h"
 #include "iothub_message.h"
 #include "iothubtransporthttp.h"
 
 #ifdef SET_TRUSTED_CERT_IN_SAMPLES
 #include "certs.h"
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
+
+// To upload multiple blocks of data using UploadToBlob, uncomment the following line.
+// #define MULTIPLE_BLOCKS
 
 /*String containing Hostname, Device Id & Device Key in the format:                         */
 /*  "HostName=<host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"                */
@@ -37,6 +38,51 @@ static int proxyPort = 0;
 
 #define HELLO_WORLD "Hello World from IoTHubClient_LL_UploadToBlob"
 
+#ifdef MULTIPLE_BLOCKS
+static int block_count = 0
+
+static IOTHUB_CLIENT_FILE_UPLOAD_GET_DATA_RESULT getDataCallback(IOTHUB_CLIENT_FILE_UPLOAD_RESULT result, unsigned char const ** data, size_t* size, void* context)
+{
+    (void)context;
+    if (result == FILE_UPLOAD_OK)
+    {
+        if (data != NULL && size != NULL)
+        {
+            // "block_count" is used to simulate reading chunks from a larger data content, like a large file.
+            if (block_count < 100)
+            {
+                *data = (const unsigned char*)HELLO_WORLD;
+                *size = strlen(HELLO_WORLD);
+                block_count++;
+            }
+            else
+            {
+                // This simulates reaching the end of the file. At this point all the data content has been uploaded to blob.
+                // Setting data to NULL and/or passing size as zero indicates the upload is completed.
+                *data = NULL;
+                *size = 0;
+                (void)printf("Indicating upload is complete (%d blocks uploaded)\r\n", block_count);
+            }
+        }
+        else
+        {
+            // The last call to this callback is to indicate the result of uploading the previous data block provided.
+            // Note: In this last call, data and size pointers are NULL.
+            (void)printf("Last call to getDataCallback (result for %dth block uploaded: %s)\r\n", block_count, ENUM_TO_STRING(IOTHUB_CLIENT_FILE_UPLOAD_RESULT, result));
+        }
+    }
+    else
+    {
+        (void)printf("Received unexpected result %s\r\n", ENUM_TO_STRING(IOTHUB_CLIENT_FILE_UPLOAD_RESULT, result));
+    }
+    // This callback returns IOTHUB_CLIENT_FILE_UPLOAD_GET_DATA_OK to indicate that the upload shall continue.
+    // To abort the upload, it should return IOTHUB_CLIENT_FILE_UPLOAD_GET_DATA_ABORT
+    return IOTHUB_CLIENT_FILE_UPLOAD_GET_DATA_OK;
+}
+#endif // MULTIPLE_BLOCKS
+
+
+
 int main(void)
 {
     IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;
@@ -44,6 +90,9 @@ int main(void)
     // Used to initialize IoTHub SDK subsystem
     (void)IoTHub_Init();
     (void)printf("Starting the IoTHub client sample upload to blob...\r\n");
+#ifdef MULTIPLE_BLOCKS
+    (void)printf("MULTIPLE_BLOCKS defined, so uploading multiple blocks to blob.\r\n");
+#endif // MULTIPLE_BLOCKS
 
     device_ll_handle = IoTHubDeviceClient_LL_CreateFromConnectionString(connectionString, HTTP_Protocol);
     if (device_ll_handle == NULL)
@@ -73,7 +122,13 @@ int main(void)
         }
         else
         {
+#ifdef MULTIPLE_BLOCKS
+            if (IoTHubDeviceClient_LL_UploadMultipleBlocksToBlob(device_ll_handle, "subdir/hello_world_mb.txt", getDataCallback, NULL) != IOTHUB_CLIENT_OK)
+ 
+#else
             if (IoTHubDeviceClient_LL_UploadToBlob(device_ll_handle, "subdir/hello_world.txt", (const unsigned char*)HELLO_WORLD, sizeof(HELLO_WORLD) - 1) != IOTHUB_CLIENT_OK)
+#endif
+
             {
                 (void)printf("hello world failed to upload\n");
             }
@@ -93,4 +148,3 @@ int main(void)
 
     return 0;
 }
-#endif /*DONT_USE_UPLOADTOBLOB*/

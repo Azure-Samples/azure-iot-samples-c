@@ -17,7 +17,7 @@ and removing calls to _DoWork will yield the same results. */
 
 #include "azure_c_shared_utility/shared_util_options.h"
 #include "iothub.h"
-#include "iothub_device_client_ll.h"
+#include "iothub_device_client.h"
 #include "iothub_message.h"
 #include "iothubtransporthttp.h"
 
