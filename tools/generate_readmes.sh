@@ -7,17 +7,18 @@ pushd "${DIR}/../device-client"
 add_readmes() {
     for element in $(find . -maxdepth 1 -type d -not -name .); do
         pushd $element
-        add_readmes
+        local cmakeheader=$element
         echo "Subdirectory: $element"
         if [[ -e "README.md" ]]; then
             echo "README.md exists."
         else
             echo "No CMakeLists in /$element/CMakeLists.txt"
             echo "Adding README.md..."
-            echo "##$element" >> README.md
-            echo "**Description: $element is run by...**" >> README.md
+            echo "##$cmakeheader" >> README.md
+            echo "**Description: $cmakeheader is run by...**" >> README.md
             echo "**To Use:**" >> README.md
-         fi
+        fi
+        add_readmes
         popd
     done
 }
