@@ -1,6 +1,5 @@
 # Multithreaded
 
-**Description:** 
 **We recommend this to new users and tinkerers.** The Multi-Threaded version of our sdk (no \_ll\_ in file names) is the highest level API of our SDK. 
 
 ## List of Samples 
