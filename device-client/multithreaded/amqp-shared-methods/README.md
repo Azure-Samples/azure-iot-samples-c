@@ -1,4 +1,4 @@
-## AMQP Shared Methods
+# AMQP Shared Methods
 
 **Description:**
 Use the AMQP Protocol with Shared Device Methods via the multi-threaded version of the Azure IoT C SDK.
