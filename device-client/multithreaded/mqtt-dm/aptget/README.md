@@ -1,4 +1,4 @@
-# MQTT DM Sample on Linux
+## MQTT DM Sample on Linux
 
 The README.md and CMakeLists.txt reference the C file in the parent of this folder.
 

@@ -1,4 +1,4 @@
-# Single-Threaded Telemetry Sample on Linux
+## Single-Threaded Telemetry Sample on Linux
 
 **Description:**
 Send Telemetry to IoT Hub via the single-threaded (\_ll\_) version of the Azure IoT C SDK.

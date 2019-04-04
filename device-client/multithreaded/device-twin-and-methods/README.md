@@ -1,4 +1,4 @@
-# Multithreaded Device Twin and Methods Sample 
+## Multithreaded Device Twin and Methods Sample 
 
 **Description:**
 Use the Device Twin and Device Methods messaging features with IoT Hub via the multi-threaded version of the Azure IoT C SDK.

@@ -1,4 +1,4 @@
-# Module Method Invoke Sample on Linux
+## Module Method Invoke Sample on Linux
 
 The README.md and CMakeLists.txt reference the C file in the parent of this folder.
 
